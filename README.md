@@ -19,6 +19,12 @@ Thank you for using Innovo Cache Improvements.
 * Admin configuration to allow cache cleaning on specific quantitiy numbers that belong to intervals of numbers. e.g Clean cache when quantity is lower than 5.
 * Admin configuration to allow cache cleaning on quantity numbers divided by a number. eg. Clean cache every time the quantity can divide by 10.
 
+## Magento 2 compatibility:
+
+Supported versions:
+ * Magento CE 2.0.5 - 2.1.8
+ * Should work on Magento 2 EE without issues
+
 ## Instalation
 
 ### With composer:
