@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Innovo. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Theme\Block\Html\Topmenu" type="Innovo\CacheImprove\Block\Theme\Html\Topmenu" />
+
+    <preference for="Magento\Framework\Indexer\CacheContext" type="Innovo\CacheImprove\Model\CacheContext" />
+    <preference for="Innovo\CacheImprove\Model\Changelog\ExtensionInterface" type="Innovo\CacheImprove\Model\Changelog\Extension" />
+    <preference for="Innovo\CacheImprove\Model\View\ExtensionInterface" type="Innovo\CacheImprove\Model\View\Extension" />
+
+    <type name="Magento\CatalogInventory\Observer\SubtractQuoteInventoryObserver">
+        <plugin name="markSkipCleanCacheMviewBeforeAfterExecute" type="Innovo\CacheImprove\Plugin\Observer\CatalogInventory\SubtractQuoteInventoryObserver"/>
+    </type>
+    <type name="Magento\CatalogInventory\Observer\ReindexQuoteInventoryObserver">
+        <plugin name="innovoSkipReindexAroundExecute" type="Innovo\CacheImprove\Plugin\Observer\CatalogInventory\ReindexQuoteInventoryObserver"/>
+    </type>
+    <type name="Magento\Framework\Mview\View">
+        <plugin name="innovoAugmentViewSchema" type="Innovo\CacheImprove\Plugin\Mview\AugmentViewSchema"/>
+    </type>
+    <type name="Innovo\CacheImprove\Model\View\Extension">
+        <arguments>
+            <argument name="affectedViewsIds" xsi:type="array">
+                <item name="cataloginventory_stock" xsi:type="string">cataloginventory_stock</item>
+            </argument>
+            <argument name="nonCacheableViewsIds" xsi:type="array">
+                <item name="catalogsearch_fulltext" xsi:type="string">catalogsearch_fulltext</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\PageCache\Observer\FlushCacheByTags">
+        <plugin name="innovoFlushCacheByTags" type="Innovo\CacheImprove\Plugin\Observer\PageCache\FlushCacheByTags"/>
+    </type>
+    <type name="Innovo\CacheImprove\Plugin\Observer\PageCache\FlushCacheByTags">
+        <arguments>
+            <argument name="additionalCacheTypes" xsi:type="array">
+                <item name="collections" xsi:type="object">Magento\Framework\App\Cache\Type\Collection</item>
+                <item name="block_html" xsi:type="object">Magento\Framework\App\Cache\Type\Block</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\CacheInvalidate\Observer\InvalidateVarnishObserver">
+        <plugin name="innovoInvalidateVarnishObserver" type="Innovo\CacheImprove\Plugin\Observer\CacheInvalidate\InvalidateVarnishObserver"/>
+    </type>
+    <type name="Innovo\CacheImprove\Plugin\Observer\CacheInvalidate\InvalidateVarnishObserver">
+        <arguments>
+            <argument name="additionalCacheTypes" xsi:type="array">
+                <item name="block_html" xsi:type="object">Magento\Framework\App\Cache\Type\Block</item>
+                <item name="collections" xsi:type="object">Magento\Framework\App\Cache\Type\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Theme\Block\Html\Topmenu">
+        <plugin name="innovoCatalogTopmenuCache" type="Innovo\CacheImprove\Plugin\Block\Theme\Html\TopmenuCache" sortOrder="1" />
+    </type>
+
+    <type name="Innovo\CacheImprove\Observer\Checkout\PostSetAllowSessionFlagObserver">
+        <arguments>
+            <argument name="session" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Innovo\CacheImprove\Observer\Checkout\PreSetAllowSessionFlagObserver">
+        <arguments>
+            <argument name="session" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Innovo\CacheImprove\Observer\Checkout\SetAllowSessionFlagObserver">
+        <arguments>
+            <argument name="session" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Innovo\CacheImprove\Plugin\Observer\CatalogInventory\ReindexQuoteInventoryObserver">
+        <arguments>
+            <argument name="session" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Innovo\CacheImprove\Plugin\Observer\CatalogInventory\SubtractQuoteInventoryObserver">
+        <arguments>
+            <argument name="session" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Innovo\CacheImprove\Model\Validator\Pool">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="abstract" xsi:type="array">
+                    <item name="abstract_validator" xsi:type="object">Innovo\CacheImprove\Model\Validator\Product\Type\AbstractType</item>
+                </item>
+                <item name="simple" xsi:type="array">
+                    <item name="simple_validator" xsi:type="object">Innovo\CacheImprove\Model\Validator\Product\Type\Simple</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Innovo. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Innovo\CacheImprove\Observer\Checkout\SetAllowSessionFlagObserver">
+        <arguments>
+            <argument name="session" xsi:type="object">Magento\Backend\Model\Session\Quote\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Innovo\CacheImprove\Plugin\Observer\CatalogInventory\ReindexQuoteInventoryObserver">
+        <arguments>
+            <argument name="session" xsi:type="object">Magento\Backend\Model\Session\Quote\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Innovo\CacheImprove\Plugin\Observer\CatalogInventory\SubtractQuoteInventoryObserver">
+        <arguments>
+            <argument name="session" xsi:type="object">Magento\Backend\Model\Session\Quote\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Innovo\CacheImprove\Model\Config\Source\Cache\Types\StockRelated">
+        <arguments>
+            <argument name="disallow" xsi:type="array">
+                <item name="config" xsi:type="string">config</item>
+                <item name="layout" xsi:type="string">layout</item>
+                <item name="reflection" xsi:type="string">reflection</item>
+                <item name="db_ddl" xsi:type="string">db_ddl</item>
+                <item name="eav" xsi:type="string">eav</item>
+                <item name="customer_notification" xsi:type="string">customer_notification</item>
+                <item name="target_rule" xsi:type="string">target_rule</item>
+                <item name="full_page" xsi:type="string">full_page</item>
+                <item name="config_integration" xsi:type="string">config_integration</item>
+                <item name="config_integration_api" xsi:type="string">config_integration_api</item>
+                <item name="translate" xsi:type="string">translate</item>
+                <item name="config_webservice" xsi:type="string">config_webservice</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

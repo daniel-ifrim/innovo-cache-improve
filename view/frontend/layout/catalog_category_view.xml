@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Innovo. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Innovo\CacheImprove\Block\CurrentCategoryJs" name="innv_current_category_js" template="Innovo_CacheImprove::current_category_js.phtml"/>
+            <block class="Innovo\CacheImprove\Block\Theme\Html\Topmenu\ActiveItemJs" name="innv_topmenu_active_item_js"
+                   template="Innovo_CacheImprove::theme/html/topmenu/active_item_js.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

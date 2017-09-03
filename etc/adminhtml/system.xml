@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Innovo. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="innovo" translate="label" sortOrder="100100">
+            <label>Innovo</label>
+        </tab>
+        <section id="innovo_cacheimprove" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Cache Improvements</label>
+            <tab>innovo</tab>
+            <resource>Innovo_CacheImprove::config_cacheimprove</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="active" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Active</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Enable/Disable extension's functionalities.]]></comment>
+                </field>
+            </group>
+            <group id="extend" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Cache Management</label>
+                <field id="fpc_cache_type_clean_tags" translate="label comment" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Clean Additional Cache Types</label>
+                    <source_model>Innovo\CacheImprove\Model\Config\Source\Cache\Types\StockRelated</source_model>
+                    <comment><![CDATA[Clean additional cache types by entity tags before built-in Page Cache/Varnish is cleaned.<br/><strong>Recommendation:</strong> In Magento 2.1 set Block Html and Collections Data. In Magento 2.0 set Collections Data.<br/>This behaviour is triggered after frontend checkout purchase is made while purchased products become out of stock.]]></comment>
+                </field>
+                <field id="force_fpc_add_product_tags" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Force Add Product Tags</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Magento 2.0 backward compatibility.<br/>Force to add Product Tags when Full Page Cache/Varnish cleans by product tags.<br/>This behaviour is triggered after frontend checkout purchase is made while purchased products become out of stock.]]></comment>
+                </field>
+                <field id="fpc_add_parent_product_tags" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Force Add Parent Product Tags</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[<strong>Recommended</strong> with Magento 2.1.3.<br/>Force clean full page cache by parent product tags.<br/>This behaviour is triggered after frontend checkout purchase is made while purchased products become out of stock.]]></comment>
+                </field>
+            </group>
+            <group id="topmenu" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Top Menu</label>
+                <field id="apply_improve" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Apply Top Menu Cache Improvements</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Enable/Disable top menu improvements.]]></comment>
+                </field>
+                <field id="block_name" translate="label comment" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Top Menu block name(s)</label>
+                    <comment><![CDATA[Top Menu block names.<br/>Can enter multiple block names separated by: comma, space or new line.<br/>Default top menu block name is "catalog.topnav".]]></comment>
+                    <frontend_class>required-entry</frontend_class>
+                    <depends>
+                        <field id="apply_improve">1</field>
+                    </depends>
+                </field>
+                <field id="remove_esi_policy" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Remove ESI Policy</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Remove ESI Policy from top menu. ESI is used by Varnish.<br/><strong>Recommendation:</strong> Set this option to <strong>'Yes'</strong> if your store's top menu contents do not change often during business hours.]]></comment>
+                    <depends>
+                        <field id="apply_improve">1</field>
+                    </depends>
+                </field>
+                <field id="override_ttl" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Overide TTL ESI Policy Value</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Change time to live of block top menu cache.]]></comment>
+                    <depends>
+                        <field id="apply_improve">1</field>
+                        <field id="remove_esi_policy">0</field>
+                    </depends>
+                </field>
+                <field id="ttl" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>TTL ESI Policy Value</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[New value of time to live of block top menu cache. The value is in seconds. Default TTL is 3600.]]></comment>
+                    <frontend_class>validate-greater-than-zero</frontend_class>
+                    <depends>
+                        <field id="apply_improve">1</field>
+                        <field id="override_ttl">1</field>
+                    </depends>
+                </field>
+                <field id="static_cache" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use Static Cache</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Decouple top menu cache from categories cache tags, such making it fast loading (server side) and insensitive to customer purchases.<br/><strong>Note:</strong> In Magento 2.0.x set this option to "Yes" to have the extension running properly.<br/><strong>Recommendation:</strong> Set this option to <strong>'Yes'</strong> if your store's top menu contents do not change often during business hours.]]></comment>
+                    <depends>
+                        <field id="apply_improve">1</field>
+                    </depends>
+                </field>
+                <field id="cache_lifetime" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cache Lifetime</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[New value of top menu block cache lifetime. The value is in seconds. Default TTL is 3600.<br/><strong>Recommendation:</strong> If "Remove ESI Policy" is "No", set this value greater or equal than "TTL ESI Policy Value".]]></comment>
+                    <frontend_class>validate-greater-than-zero</frontend_class>
+                    <depends>
+                        <field id="apply_improve">1</field>
+                        <field id="static_cache">1</field>
+                    </depends>
+                </field>
+                <field id="js_selector" translate="label comment" type="textarea" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Topmenu jQuery Selector Expressions</label>
+                    <comment><![CDATA[jQuery top menu selectors expressions.<br/>Can set multiple selectors separated by new lines or pipe character.<br/>When set to empty, active categories will not be marked.<br/>Option used to mark active categories in top menu.]]></comment>
+                    <depends>
+                        <field id="apply_improve">1</field>
+                        <field id="static_cache">1</field>
+                    </depends>
+                </field>
+                <field id="js_parents_selector" translate="label comment" type="textarea" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>jQuery Parent Items Selectors</label>
+                    <comment><![CDATA[jQuery top menu selectors expressions used to select parent items of current active item in top menu.<br/>Can set multiple selectors separated by new lines or pipe character.<br/>Option used to mark active categories in top menu.]]></comment>
+                    <depends>
+                        <field id="apply_improve">1</field>
+                        <field id="static_cache">1</field>
+                    </depends>
+                </field>
+                <field id="css_active" translate="label comment" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>CSS Class of Active Item</label>
+                    <comment><![CDATA[CSS class to add to current active item in top menu.<br/>Option used to mark active categories in top menu.]]></comment>
+                    <depends>
+                        <field id="apply_improve">1</field>
+                        <field id="static_cache">1</field>
+                    </depends>
+                </field>
+                <field id="css_has_active" translate="label comment" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>CSS Class of Has Active Items</label>
+                    <comment><![CDATA[CSS class to add to all parent items of current active item.<br/>Option used to mark active categories in top menu.]]></comment>
+                    <depends>
+                        <field id="apply_improve">1</field>
+                        <field id="static_cache">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="payment" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Payment</label>
+                <field id="full_action_names_pre_dispatch" translate="label comment" type="textarea" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Checkout Full Action Names (pre dispatch)</label>
+                    <comment><![CDATA[Checkout full action names allowed to initialize the process of using cache on products still in stock.<br/>Separated by new line or pipe character.<br/>e.g 'paypal_express_placeOrder'.<br/>'checkout_index_index' not included in this configuration.<br/>Configuration hooked on pre dispatch action event.]]></comment>
+                </field>
+                <field id="full_action_names_post_dispatch" translate="label comment" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Checkout Full Action Names (post dispatch)</label>
+                    <comment><![CDATA[Checkout full action names allowed to initialize the process of using cache on products still in stock.<br/>Separated by new line or pipe character.<br/>e.g 'paypal_express_returnAction'.<br/>'checkout_index_index' not included in this configuration.<br/>Configuration hooked on post dispatch action event.]]></comment>
+                </field>
+            </group>
+            <group id="stock" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Inventory</label>
+                <field id="qty_division" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Quantity Divisions</label>
+                    <comment><![CDATA[Clean cache when quantity divides with a number greater than 1.<br/>Leave empty to clean cache only when product gets out of stock.]]></comment>
+                    <frontend_class>validate-greater-than-zero validate-digits-range digits-range-2-9999999</frontend_class>
+                </field>
+                <field id="discrete_qty" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Discrete Quantities</label>
+                    <backend_model>Innovo\CacheImprove\Model\Config\Backend\Stock\DiscreteQty</backend_model>
+                    <comment><![CDATA[Clean cache when products quantities become these numbers.<br/>Enter valid positive numbers separated by comma.<br/>Can set intervals. eg. 1-5,21-30. First number in interval is included. Last number in interval is excluded.<br/>Leave empty to clean cache only when product gets out of stock.]]></comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

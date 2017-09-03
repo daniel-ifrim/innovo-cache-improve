@@ -1,0 +1,22 @@
+<?php
+/**
+ * Copyright © 2016 Innovo. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * Current category js
+ *
+ * @var $block \Innovo\CacheImprove\Block\CurrentCategoryJs
+ */
+?>
+<script>
+    if (!window.innvConfig) {
+        window.innvConfig = {};
+    }
+    <?php if ($block->getCurrentCategoryId()): ?>
+    window.innvConfig.ciCurrentCategory = '<?php /* @escapeNotVerified */ echo $block->escapeJsQuote($block->getCurrentCategoryId()); ?>';
+    <?php endif;?>
+</script>

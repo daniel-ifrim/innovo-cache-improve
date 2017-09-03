@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Innovo. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <innovo_cacheimprove>
+            <general>
+                <active>1</active>
+            </general>
+            <extend>
+                <fpc_cache_type_clean_tags>collections</fpc_cache_type_clean_tags>
+                <force_fpc_add_product_tags>1</force_fpc_add_product_tags>
+                <fpc_add_parent_product_tags>0</fpc_add_parent_product_tags>
+            </extend>
+            <topmenu>
+                <apply_improve>1</apply_improve>
+                <block_name>catalog.topnav</block_name>
+                <remove_esi_policy>1</remove_esi_policy>
+                <override_ttl>0</override_ttl>
+                <ttl>3600</ttl>
+                <static_cache>1</static_cache>
+                <cache_lifetime>3600</cache_lifetime>
+                <js_selector><![CDATA[.navigation]]></js_selector>
+                <js_parents_selector><![CDATA[li.level0|li.level1|li.level2|li.level3]]></js_parents_selector>
+                <css_active><![CDATA[active]]></css_active>
+                <css_has_active><![CDATA[has-active]]></css_has_active>
+            </topmenu>
+            <payment>
+                <full_action_names_pre_dispatch><![CDATA[]]></full_action_names_pre_dispatch>
+                <full_action_names_post_dispatch><![CDATA[multishipping_checkout_overview
+paypal_express_return
+paypal_express_returnAction
+paypal_express_start
+paypal_bml_start
+paypal_payflow_form
+paypal_payflowadvanced_form
+paypal_payflowbml_start
+paypal_payflowexpress_return
+paypal_payflowexpress_returnAction
+paypal_payflowexpress_start
+braintree_paypal_review]]></full_action_names_post_dispatch>
+            </payment>
+            <stock>
+                <qty_division />
+                <discrete_qty />
+            </stock>
+        </innovo_cacheimprove>
+    </default>
+</config>

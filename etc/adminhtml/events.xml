@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Innovo. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="controller_action_postdispatch_sales_order_create_index">
+        <observer name="setSessionFlagObserver" instance="Innovo\CacheImprove\Observer\Checkout\SetAllowSessionFlagObserver" />
+    </event>
+</config>

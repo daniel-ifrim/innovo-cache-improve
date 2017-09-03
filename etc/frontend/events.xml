@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Innovo. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="controller_action_postdispatch_checkout_index_index">
+        <observer name="setSessionFlagObserver" instance="Innovo\CacheImprove\Observer\Checkout\SetAllowSessionFlagObserver" />
+    </event>
+    <event name="controller_action_predispatch">
+        <observer name="setPreDispatchSessionFlagObserver" instance="Innovo\CacheImprove\Observer\Checkout\PreSetAllowSessionFlagObserver" />
+    </event>
+    <event name="controller_action_postdispatch">
+        <observer name="setPostDispatchSessionFlagObserver" instance="Innovo\CacheImprove\Observer\Checkout\PostSetAllowSessionFlagObserver" />
+    </event>
+    <event name="page_block_html_topmenu_gethtml_before">
+        <observer name="innovoRemoveActiveItem" instance="Innovo\CacheImprove\Observer\Catalog\TopmenuRemoveActiveItem" />
+    </event>
+</config>
