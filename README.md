@@ -21,6 +21,8 @@ Thank you for using Innovo Cache Improvements.
 
 ## Magento 2 compatibility:
 
+***Magento 2.2.x includes the main feature of this extension. See \Magento\CatalogInventory\Model\Indexer\Stock\CacheCleaner***
+
 Supported versions:
  * Magento CE 2.0.5 - 2.1.8
  * Should work on Magento 2 EE without issues
